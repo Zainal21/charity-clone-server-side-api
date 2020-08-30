@@ -26,7 +26,8 @@
 
                     <!-- Area Chart -->
                     <div class="col-xl-12 col-lg-7">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{url('/causes')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                             <div class="row">
                                 <div class="col-8">
                                     <div class="card">
@@ -41,16 +42,16 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="title">Kategori</label>
-                                                <select name="" id="" class="form-control">
+                                                <select name="category" id="" class="form-control">
                                                     <option value="" class="form-control">-Pilih Kategori-</option>
-                                                    <option value="" class="form-control">Berita</option>
-                                                    <option value="" class="form-control">Artikel</option>
-                                                    <option value="" class="form-control">Pengumuman</option>
+                                                    <option value="Category 1" class="form-control">Category 1</option>
+                                                    <option value="Category 2" class="form-control">Category 2</option>
+                                                    <option value="Category 3" class="form-control">Category 3</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                               <label for="Goal">Goal</label>
-                                              <input type="text" id="Goal" class="form-control" name="Goal"
+                                              <input type="text" id="Goal" class="form-control" name="goal"
                                               autofocus="" value="" placeholder="12000 in Rupiah">
                                             </div>
                                             <div class="form-group">
@@ -82,7 +83,7 @@
                                                         Image</a>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" accept="image/*" name="cover" id="cover"
+                                                    <input type="file" accept="image/*" name="thumbnail" id="cover"
                                                         class="custom-file-input js-upload-image form-control">
                                                     <label class="custom-file-label " for="cover">Choose file</label>
                                                 </div>

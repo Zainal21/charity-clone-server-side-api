@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use  Illuminate\Support\Facades\Crypt;
 class UserController extends Controller
 {
     /**
@@ -38,30 +39,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'email', 'required',
-            'password' => 'required'
-        ]);
+       
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'email', 'required',
+    //         'password' => 'required'
+    //     ]);
 
         User::create([
             'name' => $request->name,
             'email' =>  $request->email,
             'password' => bcrypt($request->password)
         ]);
-        return response()->json(['success']);
+        return redirect()->route('users.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -71,7 +63,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $desc = Crypt::decrypt($id);
+        $this->vars = [
+            'user' => User::findOrfail($desc)
+        ];
+        return view('pages.user.edit', $this->vars);
     }
 
     /**
@@ -83,7 +79,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      
+        User::where(['id' =>$request->id])->update([
+            'name' => $request->name,
+            'email' =>  $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+        return redirect()->route('users.index');
+     
     }
 
     /**
@@ -94,6 +97,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('users.index');
     }
 }

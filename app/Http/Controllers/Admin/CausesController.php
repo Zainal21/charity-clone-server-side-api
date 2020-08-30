@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Model\cause;
+use Illuminate\Support\Facades\Crypt;
 class CausesController extends Controller
 {
     /**
@@ -14,7 +15,10 @@ class CausesController extends Controller
      */
     public function index()
     {
-        return view('pages.cause.index');
+        $this->var = [
+           'cause' => cause::all() 
+        ];
+        return view('pages.cause.index', $this->var);
     }
 
     /**
@@ -35,7 +39,15 @@ class CausesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        cause::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'thumbnail' => $request->file('thumbnail')->store('upload/cause', 'public'),
+            'goal' => $request->goal,
+            'description' => $request->description,
+            'date_end' => $request->date_end
+        ]);
+        return redirect('/causes');
     }
 
     /**
@@ -57,7 +69,10 @@ class CausesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $desc = Crypt::decrypt($id);
+        return view('pages.cause.edit', [
+            'cause' => cause::findOrfail($desc)
+        ]);
     }
 
     /**
@@ -69,7 +84,25 @@ class CausesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!$request->file('thumbnail')){
+            cause::where(['id' => $id])->update([
+                'title' => $request->title,
+                'category' => $request->category,   
+                'goal' => $request->goal,
+                'description' => $request->description,
+                'date_end' => $request->date_end
+            ]);
+            return redirect('/causes');
+        }else{
+            cause::where(['id' => $id])->update([
+                'title' => $request->title,
+                'category' => $request->category,   
+                'goal' => $request->goal,
+                'description' => $request->description,
+                'date_end' => $request->date_end
+            ]);
+            return redirect('/causes');
+        }
     }
 
     /**
@@ -80,6 +113,7 @@ class CausesController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        cause::destroy($id);
+        return redirect('/causes');
+    } 
 }

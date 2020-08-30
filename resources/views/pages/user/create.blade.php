@@ -26,33 +26,29 @@
 
                     <!-- Area Chart -->
                     <div class="col-lg-12">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('users.store')}}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header">
                                             <h6 class="m-0 font-weight-bold text-primary">Add item</h6>
                                         </div>
-                                        <div class="card-body">
+                                    <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Name</label>
-                                                <input type="text" id="title" class="form-control" name="title"
+                                                <input type="text" id="title" class="form-control" name="name"
                                                     autofocus="" value="">
                                             </div>
                                             <div class="form-group">
-                                              <label for="Goal">Goal</label>
-                                              <input type="text" id="Goal" class="form-control" name="Goal"
-                                              autofocus="" value="" placeholder="12000 in Rupiah">
-                                            </div>
-                                            <div class="form-group">
                                               <label for="Date End">Email</label>
-                                              <input type="date" id="Goal" class="form-control" name="date_end"
-                                              autofocus="" value="" placeholder="Date End">
+                                              <input type="email" id="Goal" class="form-control" name="email"
+                                              autofocus="" value="" >
                                             </div>
                                             <div class="form-group">
-                                                <label for="Date End">Confirm Pasword</label>
-                                                <input type="date" id="Goal" class="form-control" name="date_end"
-                                                autofocus="" value="" placeholder="Date End">
+                                                <label for="Date End">Pasword</label>
+                                                <input type="password" id="Goal" class="form-control" name="password"
+                                                autofocus="" value="" >
                                             </div>
                                             <button type="submit" class="btn btn-primary">Add </button>
                                         <a href="{{url('/users')}}" class="btn btn-danger">Back</a>

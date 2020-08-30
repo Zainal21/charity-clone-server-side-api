@@ -19,49 +19,51 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Edit Cause</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Add Cause</h1>
                 </div>
 
                 <div class="row">
 
                     <!-- Area Chart -->
                     <div class="col-xl-12 col-lg-7">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{url('/causes/update/' .$cause->id)}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('put')
                             <div class="row">
                                 <div class="col-8">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h6 class="m-0 font-weight-bold text-primary">Edit item</h6>
+                                            <h6 class="m-0 font-weight-bold text-primary">Add item</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Title</label>
                                                 <input type="text" id="title" class="form-control" name="title"
-                                                    autofocus="" value="">
+                                            autofocus="" value="{{$cause->title}}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="title">Kategori</label>
-                                                <select name="" id="" class="form-control">
+                                                <select name="category" id="" class="form-control">
                                                     <option value="" class="form-control">-Pilih Kategori-</option>
-                                                    <option value="" class="form-control">Berita</option>
-                                                    <option value="" class="form-control">Artikel</option>
-                                                    <option value="" class="form-control">Pengumuman</option>
+                                                    <option value="Category 1" class="form-control">Category 1</option>
+                                                    <option value="Category 2" class="form-control">Category 2</option>
+                                                    <option value="Category 3" class="form-control">Category 3</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                               <label for="Goal">Goal</label>
-                                              <input type="text" id="Goal" class="form-control" name="Goal"
-                                              autofocus="" value="" placeholder="12000 in Rupiah">
+                                              <input type="text" id="Goal" class="form-control" name="goal"
+                                              autofocus="" value="{{$cause->goal}}" placeholder="12000 in Rupiah">
                                             </div>
                                             <div class="form-group">
                                               <label for="Date End">Date end</label>
                                               <input type="date" id="Goal" class="form-control" name="date_end"
-                                              autofocus="" value="" placeholder="Date End">
+                                              autofocus="" value="{{$cause->date_end}}" placeholder="Date End">
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">Deskripsi</label>
                                                 <textarea id="description" cols="30" rows="10" class="form-control"
-                                                    style="height: auto;" name="description"></textarea>
+                                                    style="height: auto;" name="description">{{$cause->description}}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -75,14 +77,14 @@
                                             <div class="form-group">
                                                 <label>Thumnail</label>
                                                 <div class="mb-2">
-                                                    <img src="" class="img-fluid" alt="" id="upload-img-preview"
-                                                        style="display: none;">
-                                                    <a href="#" class="text-danger" id="upload-img-delete"
+                                                <img src="{{\Storage::url($cause->thumbnail)}}" class="img-fluid mt-2" alt="" id="upload-img-preview"
+                                                      >
+                                                    {{-- <a href="#" class="text-danger" id="upload-img-delete"
                                                         style="display: none;">Delete Cover
-                                                        Image</a>
+                                                        Image</a> --}}
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" accept="image/*" name="cover" id="cover"
+                                                    <input type="file" accept="image/*" name="thumbnail" id="cover"
                                                         class="custom-file-input js-upload-image form-control">
                                                     <label class="custom-file-label " for="cover">Choose file</label>
                                                 </div>
@@ -90,7 +92,7 @@
                                         </div>
                                         <div class="card-footer bg-whitesmoke">
                                             <button type="submit" class="btn btn-simpan  btn-primary">
-                                                Add
+                                                Update
                                             </button>
 
                                         <a href="{{url('/causes')}}" class="btn btn-danger  btn-secondary">
@@ -121,6 +123,5 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<@include('layout.modal_lg')
+@include('layout.modal_lg')
 @include('layout.footer')

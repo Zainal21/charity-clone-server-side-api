@@ -14,10 +14,10 @@ class AuthController extends Controller
 
     public function process(Request $req)
     {
-        // $req->validate([
-        //     'username' => 'required',
-        //     'password' => 'required'
-        // ]);
+        $req->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
 
         if (Auth::attempt(['name' => $req->username, 'password' => $req->password])) {
             // dd();
