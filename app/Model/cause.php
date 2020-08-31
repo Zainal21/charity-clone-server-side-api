@@ -10,10 +10,14 @@ class cause extends Model
     protected $fillable = [
         'title',
         'category',
-        'thumnail',
         'thumbnail',
         'goal',
         'description',
         'date_end'
     ];
+
+    public function getThumbnailAttribute($value)
+    {
+        return url('Storage/'. $value);
+    }
 }
