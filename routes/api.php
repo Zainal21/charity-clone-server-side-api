@@ -19,5 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('v1/cause', 'API\CauseController@index');
-
 Route::get('v1/cause/{id}', 'API\CauseController@show');

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use  App\Http\Controllers\API\ResponseFormatter;
-
 use App\Model\cause;
+
 class CauseController extends Controller
 {
     public function index(Request $req)
