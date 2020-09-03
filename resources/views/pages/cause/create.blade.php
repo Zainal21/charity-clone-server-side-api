@@ -37,22 +37,37 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Title</label>
-                                                <input type="text" id="title" class="form-control" name="title"
-                                                    autofocus="" value="">
+                                                <input type="text" id="title" class="form-control @error('title') is-invalid @enderror" name="title"
+                                                    autofocus="" value="" >
+                                                    @error('title')
+                                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                                       {{$message}}
+                                                    </div>
+                                                    @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="title">Kategori</label>
-                                                <select name="category" id="" class="form-control">
+                                                <select name="category" id="" class="form-control @error('category') is-invalid @enderror">
                                                     <option value="" class="form-control">-Pilih Kategori-</option>
                                                     <option value="Category 1" class="form-control">Category 1</option>
                                                     <option value="Category 2" class="form-control">Category 2</option>
                                                     <option value="Category 3" class="form-control">Category 3</option>
                                                 </select>
+                                                @error('category')
+                                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                                   {{$message}}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                               <label for="Goal">Goal</label>
-                                              <input type="text" id="Goal" class="form-control" name="goal"
+                                              <input type="text" id="Goal" class="form-control @error('goal') is-invalid @enderror" name="goal"
                                               autofocus="" value="" placeholder="12000 in Rupiah">
+                                              @error('goal')
+                                              <div id="validationServer03Feedback" class="invalid-feedback">
+                                                 {{$message}}
+                                              </div>
+                                              @enderror
                                             </div>
                                             <div class="form-group">
                                               <label for="Date End">Date end</label>
@@ -61,8 +76,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">Deskripsi</label>
-                                                <textarea id="description" cols="30" rows="10" class="form-control"
+                                                <textarea id="description" cols="30" rows="10" class="form-control @error('description') is-invalid @enderror"
                                                     style="height: auto;" name="description"></textarea>
+                                                    @error('description')
+                                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                                       {{$message}}
+                                                    </div>
+                                                    @enderror
                                             </div>
                                         </div>
                                     </div>

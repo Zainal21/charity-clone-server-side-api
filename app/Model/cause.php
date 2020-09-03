@@ -18,6 +18,6 @@ class cause extends Model
 
     public function getThumbnailAttribute($value)
     {
-        return url('Storage/'. $value);
+        return url('storage/' . $value);
     }
 }

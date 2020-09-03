@@ -40,14 +40,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
        
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'email' => 'email', 'required',
-    //         'password' => 'required'
-    //     ]);
+        $request->validate([
+            'username' => 'required',
+            'email' => 'email', 'required',
+            'password' => 'required'
+        ]);
 
         User::create([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' =>  $request->email,
             'password' => bcrypt($request->password)
         ]);
@@ -79,9 +79,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'username' => 'required',
+            'email' => 'email', 'required',
+            'password' => 'required'
+        ]);
       
         User::where(['id' =>$request->id])->update([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' =>  $request->email,
             'password' => bcrypt($request->password)
         ]);

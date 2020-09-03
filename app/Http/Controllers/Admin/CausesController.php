@@ -39,6 +39,11 @@ class CausesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required','min:3', 'max:255'],   
+            'goal' => 'required',
+            'description' => ['required','min:3', 'max:255'],
+        ]);
         cause::create([
             'title' => $request->title,
             'category' => $request->category,
@@ -84,6 +89,11 @@ class CausesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => ['required','min:5', 'max:255'],   
+            'goal' => 'required',
+            'description' => ['required','min:5', 'max:255'],
+        ]);
         if(!$request->file('thumbnail')){
             cause::where(['id' => $id])->update([
                 'title' => $request->title,

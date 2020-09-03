@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use Validator;
 class AuthController extends Controller
 {
     public function login()
@@ -14,18 +15,18 @@ class AuthController extends Controller
 
     public function process(Request $req)
     {
-        $req->validate([
+        $rule = [
             'username' => 'required',
-            'password' => 'required'
-        ]);
+            'password' =>  'required'
+        ];
+        $error = Validator::make($req->all(), $rule);
 
-        if (Auth::attempt(['name' => $req->username, 'password' => $req->password])) {
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()] );
+        }else if (Auth::attempt(['username' => $req->username, 'password' => $req->password])) {
             // dd();
             // return response()->json(['success' => 'login success']);
-           return redirect()->route('admin');
-        }else{
-            // return response()->json(['error' => 'login failed']);
-            return redirect()->back();
+           return response()->json(['success' => 'Login Berhasil']);
         }
     }
 
@@ -33,7 +34,7 @@ class AuthController extends Controller
     {
         if(Auth::user()){
             Auth::logout();
-            return redirect('/login');
+            return redirect('/');
         }
         return redirect()->back();
     }

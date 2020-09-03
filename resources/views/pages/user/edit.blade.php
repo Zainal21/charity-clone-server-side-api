@@ -39,18 +39,33 @@
                                             <div class="form-group">
                                                 <label for="title">Name</label>
 
-                                                <input type="text" id="title" class="form-control" name="name"
-                                                    autofocus="" value="{{ $user->name}}">
+                                                <input type="text" id="title" class="form-control @error('username') is-invalid @enderror" name="username"
+                                                    autofocus="" value="{{ $user->username}}">
+                                                    @error('username')
+                                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                                       {{$message}}
+                                                    </div>
+                                                    @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="Date End">Email</label>
-                                                <input type="email" id="Goal" class="form-control" name="email"
-                                                    autofocus="" value="{{$user->email}}">
+                                                <input type="email" id="Goal" class="form-control @error('email') is-invalid @enderror" name="email"
+                                                    autofocus="" value="{{$user->email}}" >
+                                                    @error('email')
+                                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                                       {{$message}}
+                                                    </div>
+                                                    @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="Date End">New Pasword</label>
-                                                <input type="password" id="Goal" class="form-control" name="password"
+                                                <input type="password" id="Goal" class="form-control @error('password') is-invalid @enderror" name="password"
                                                     autofocus="" value="">
+                                                @error('password')
+                                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <button type="submit" class="btn btn-primary">Add </button>
                                             <a href="{{url('/users')}}" class="btn btn-danger">Back</a>

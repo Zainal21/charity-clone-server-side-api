@@ -62,7 +62,7 @@
                        <tr>
                         <td>{{$item->title}}</td>
                         <td>{{$item->category}}</td>
-                       <td><img src="{{\Storage::url($item->thumbnail)}}"width="100px"  class="img-fluid" height="100px" alt=""></td>
+                       <td><img src="{{$item->thumbnail}}"width="100px"  class="img-fluid" height="100px" alt=""></td>
                        <td>{{$item->goal}}</td>
                         <td>{{$item->description}}</td>
                        <td>{{$item->date_end}}</td>

@@ -26,7 +26,7 @@
 
                     <!-- Area Chart -->
                     <div class="col-lg-12">
-                    <form action="{{route('users.store')}}" method="POST">
+                    <form action="{{url('/users')}}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -37,18 +37,33 @@
                                     <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Name</label>
-                                                <input type="text" id="title" class="form-control" name="name"
-                                                    autofocus="" value="">
+                                                <input type="text" id="title" class="@error('name') is-invalid @enderror form-control" name="name"
+                                                    autofocus="" value="{{old('name')}}">
+                                                    @error('name')
+                                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                                       {{$message}}
+                                                    </div>
+                                                    @enderror
                                             </div>
                                             <div class="form-group">
                                               <label for="Date End">Email</label>
-                                              <input type="email" id="Goal" class="form-control" name="email"
-                                              autofocus="" value="" >
+                                              <input type="email" id="Goal" class="form-control @error('email') is-invalid @enderror" name="email"
+                                            autofocus="" value="{{old('email')}}" >
+                                              @error('email')
+                                              <div id="validationServer03Feedback" class="invalid-feedback">
+                                                 {{$message}}
+                                              </div>
+                                              @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="Date End">Pasword</label>
-                                                <input type="password" id="Goal" class="form-control" name="password"
+                                                <input type="password" id="Goal" class="form-control @error('password') is-invalid @enderror" name="password"
                                                 autofocus="" value="" >
+                                                @error('password')
+                                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                                   {{$message}}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <button type="submit" class="btn btn-primary">Add </button>
                                         <a href="{{url('/users')}}" class="btn btn-danger">Back</a>
