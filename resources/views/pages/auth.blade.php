@@ -32,12 +32,12 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
-            <div class="row" style="background-image: url({{asset('assets/img/bradcam2.png')}});"> 
+            <div class="row"> 
             
               <div class="col-lg-12 justify-content-center">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-white mb-4 "><strong>Charity !</strong></h1>
+                    <h1 class="h4 text-black mb-4 "><strong>Charity !</strong></h1>
                   </div>
                 <form class="user form-login" action="{{url('/login')}}" method="POST">
                   @csrf
