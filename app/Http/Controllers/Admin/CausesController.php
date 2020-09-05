@@ -49,6 +49,7 @@ class CausesController extends Controller
             'category' => $request->category,
             'thumbnail' => $request->file('thumbnail')->store('upload/cause', 'public'),
             'goal' => $request->goal,
+            'fund_raished' => $request->fund_raished,
             'description' => $request->description,
             'date_end' => $request->date_end
         ]);
@@ -99,6 +100,7 @@ class CausesController extends Controller
                 'title' => $request->title,
                 'category' => $request->category,   
                 'goal' => $request->goal,
+                'fund_raished' => $request->fund_raished,
                 'description' => $request->description,
                 'date_end' => $request->date_end
             ]);
@@ -108,6 +110,7 @@ class CausesController extends Controller
                 'title' => $request->title,
                 'category' => $request->category,   
                 'goal' => $request->goal,
+                'fund_raished' => $request->fund_raished,
                 'description' => $request->description,
                 'date_end' => $request->date_end
             ]);

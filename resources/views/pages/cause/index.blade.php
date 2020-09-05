@@ -41,6 +41,7 @@
                           <th>Category</th>
                           <th>Thumnail</th>
                           <th>Goal</th>
+                          <th>Fund Raished</th>
                           <th>Description</th>
                           <th>Date End</th>
                           <th>Action</th>
@@ -51,7 +52,8 @@
                           <th>Title</th>
                           <th>Category</th>
                           <th>Thumnail</th>
-                          <th>Goal</th>
+                          <th>Goal</th> 
+                          <th>Fund Raished</th>
                           <th>Description</th>
                           <th>Date End</th>
                           <th>Action</th>
@@ -64,6 +66,7 @@
                         <td>{{$item->category}}</td>
                        <td><img src="{{$item->thumbnail}}"width="100px"  class="img-fluid" height="100px" alt=""></td>
                        <td>{{$item->goal}}</td>
+                       <td>{{$item->fund_raished}}</td>
                         <td>{{$item->description}}</td>
                        <td>{{$item->date_end}}</td>
                        <td>
@@ -74,9 +77,7 @@
                           </form>   
                           <a href="{{url('/causes/edit/'. Crypt::Encrypt($item->id))}}" class="btn btn-sm btn-primary my-2">Edit</a></td>
                       </tr>
-                       @endforeach
-                       
-                       
+                       @endforeach   
                       </tbody>
                     </table>
                 </div>

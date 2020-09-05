@@ -70,6 +70,16 @@
                                               @enderror
                                             </div>
                                             <div class="form-group">
+                                                <label for="Goal">fund_raished</label>
+                                                <input type="text" id="Goal" class="form-control @error('fund_raished') is-invalid @enderror" name="fund_raished"
+                                                autofocus="" value="" placeholder="12000 in Rupiah">
+                                                @error('fund_raished')
+                                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                                   {{$message}}
+                                                </div>
+                                                @enderror
+                                              </div>
+                                            <div class="form-group">
                                               <label for="Date End">Date end</label>
                                               <input type="date" id="Goal" class="form-control" name="date_end"
                                               autofocus="" value="" placeholder="Date End">

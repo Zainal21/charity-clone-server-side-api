@@ -27,7 +27,7 @@ class DonationController extends Controller
         }else{
             // update goal cause
             $total = $cause->update([
-                'goal' => $cause->goal - $donation->total_donation
+                'fund_raished' => $cause->goal - $donation->total_donation
              ]);
             return ResponseFormatter::success($total, 'Donasi Berhasil, Terimakasih');
         }

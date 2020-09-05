@@ -12,4 +12,10 @@ class donation extends Model
         'email',
         'total_donation',
     ];
+
+ 
+    public function causes()
+    {
+        return $this->belongsTo(cause::class,'causes_id','id');
+    }
 }

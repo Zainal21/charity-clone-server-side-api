@@ -17,8 +17,9 @@ class CreateCausesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('category');
-            $table->string('thumnail');
+            $table->string('thumbnail');
             $table->string('goal');
+            $table->string('fund_raished');
             $table->text('description');
             $table->date('date_end');
             $table->timestamps();
