@@ -25,7 +25,7 @@ class DonationRequest extends FormRequest
     {
         return [
             'causes_id' => 'required',
-            'name' => 'required',
+            'name' => 'required|min:2|max:255',
             'email' => 'required',
             'total_donation' => 'required'
         ];
