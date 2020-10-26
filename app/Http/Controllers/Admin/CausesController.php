@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\cause;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
+
 class CausesController extends Controller
 {
     /**
@@ -44,10 +46,12 @@ class CausesController extends Controller
             'goal' => 'required',
             'description' => ['required','min:3', 'max:255'],
         ]);
+        $file = $request->file('thumbnail');
+        $image = $file->move('images/thumbnail/', time(). '-'. Str::limit(Str::slug($req->title), 50, ''). '-' . strtotime('now'). '.'. $file->getClientOriginalExtension()); 
         cause::create([
             'title' => $request->title,
             'category' => $request->category,
-            'thumbnail' => $request->file('thumbnail')->store('upload/cause', 'public'),
+            'thumbnail' => $image,
             'goal' => $request->goal,
             'fund_raished' => $request->fund_raished,
             'description' => $request->description,
@@ -95,27 +99,45 @@ class CausesController extends Controller
             'goal' => 'required',
             'description' => ['required','min:5', 'max:255'],
         ]);
-        if(!$request->file('thumbnail')){
+        $cause = cause::findOrfail($id);
+        if($request->hasFile('thumbnail')){
+            if(file_exists($cause->thumbnail)){
+                unlink($cause->thumbnail);
+            }
+            $file = $request->file('thumbnail');
+            $image = $file->move('images/thumbnail/', time(). '-'. Str::limit(Str::slug($req->title), 50, ''). '-' . strtotime('now'). '.'. $file->getClientOriginalExtension()); 
             cause::where(['id' => $id])->update([
-                'title' => $request->title,
-                'category' => $request->category,   
-                'goal' => $request->goal,
-                'fund_raished' => $request->fund_raished,
-                'description' => $request->description,
-                'date_end' => $request->date_end
-            ]);
-            return redirect('/causes');
-        }else{
-            cause::where(['id' => $id])->update([
-                'title' => $request->title,
-                'category' => $request->category,   
-                'goal' => $request->goal,
-                'fund_raished' => $request->fund_raished,
-                'description' => $request->description,
-                'date_end' => $request->date_end
-            ]);
-            return redirect('/causes');
+                        'title' => $request->title,
+                        'category' => $request->category,   
+                        'goal' => $request->goal,
+                        'fund_raished' => $request->fund_raished,
+                        'thumbnail' => !empty($image) ? $image : $cause->thumbnail,
+                        'description' => $request->description,
+                        'date_end' => $request->date_end
+                ]);
+            return redirect('/causes')->with('status', 'New Causes Updated Successfully');
+
         }
+        // if(!$request->file('thumbnail')){
+        //     cause::where(['id' => $id])->update([
+        //         'title' => $request->title,
+        //         'category' => $request->category,   
+        //         'goal' => $request->goal,
+        //         'fund_raished' => $request->fund_raished,
+        //         'description' => $request->description,
+        //         'date_end' => $request->date_end
+        //     ]);
+        //     return redirect('/causes');
+        // }else{
+        //     cause::where(['id' => $id])->update([
+        //         'title' => $request->title,
+        //         'category' => $request->category,   
+        //         'goal' => $request->goal,
+        //         'fund_raished' => $request->fund_raished,
+        //         'description' => $request->description,
+        //         'date_end' => $request->date_end
+        //     ]);
+
     }
 
     /**
