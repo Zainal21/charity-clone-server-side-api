@@ -1,6 +1,6 @@
 // const _flogin = document.querySelector('.form-login')
 const _btnlogin = document.querySelector('.btn-login')
-
+const Backend = 'http://localhost:8000/api/v1';
 
 $('.form-login').on('submit', function(e){
   e.preventDefault()
@@ -10,7 +10,7 @@ var password = $("input[name=password]").val();
        
   if(_btnlogin.value = 'Login'){
     $.ajax({
-      url : `/login`,
+      url : `${Backend}/login`,
       method: 'POST',
       dataType:'JSON',
       data : {
@@ -25,7 +25,7 @@ var password = $("input[name=password]").val();
             text:'Silahkan Tunggu, Halaman Segera Dialihkan',
             type:'success'
           }).then(()=>{
-            window.location.href = '/admin'
+            window.location.href = 'http://localhost:8000/admin'
           })
         }else if(data.errors){
           console.log(data.errors)

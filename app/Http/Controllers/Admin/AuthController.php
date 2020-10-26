@@ -22,11 +22,11 @@ class AuthController extends Controller
         $error = Validator::make($req->all(), $rule);
 
         if($error->fails()){
-            return response()->json(['errors' => $error->errors()->all()] );
+            return redirect()->back()->with('status', $error->errors()->all());
         }else if (Auth::attempt(['username' => $req->username, 'password' => $req->password])) {
-            // dd();
-            // return response()->json(['success' => 'login success']);
-           return response()->json(['success' => 'Login Berhasil']);
+           return redirect()->route('admin');
+        }else{
+            return redirect()->back()->with('status', 'Username atau Password Salah');
         }
     }
 
